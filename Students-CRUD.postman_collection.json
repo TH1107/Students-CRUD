@@ -1,0 +1,257 @@
+{
+	"info": {
+		"_postman_id": "85c7af38-1acf-4f8b-a9db-594ff77c0470",
+		"name": "Students-CRUD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25258931",
+		"_collection_link": "https://www.postman.com/nsuyash11/workspace/student-management/collection/8125072-85c7af38-1acf-4f8b-a9db-594ff77c0470?action=share&source=collection_link&creator=25258931"
+	},
+	"item": [
+		{
+			"name": "Create New Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('statusCode', () => {\r",
+							"    pm.response.to.have.status(201);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"statusMessage\", () => {\r",
+							"    pm.expect(pm.response.status).to.be.eq(\"Created\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"cookieLanguage\", () => {\r",
+							"    pm.response.cookies.to.have.property(\"Language\");\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"first_name\": \"test1\",\r\n    \"middle_name\": \"mid1\",\r\n    \"last_name\": \"last1\",\r\n    \"date_of_birth\": \"15/01/2001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://thetestingworldapi.com/api/studentsDetails",
+					"protocol": "https",
+					"host": [
+						"thetestingworldapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"studentsDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET All Students",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"statusCode\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"statusCodeMessage\", () => {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://thetestingworldapi.com/api/studentsDetails",
+					"protocol": "https",
+					"host": [
+						"thetestingworldapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"studentsDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Student By ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"statusCode\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"statusCodeMessage\", () => {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"})\r",
+							"\r",
+							"// pm.test(\"cookieLanguage\", () => {\r",
+							"//     pm.cookies.to.have(\"language\");\r",
+							"//     // pm.expect(pm.cookies.has(\"language\")).to.be.true;\r",
+							"// });\r",
+							"\r",
+							"// pm.test(\"cookieLanguageValue\", () => {\r",
+							"//     pm.expect(pm.cookies.get(\"language\")).to.eql(\"en-gb\");\r",
+							"// })\r",
+							"\r",
+							"pm.test(\"responseTime\", () => {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(100);\r",
+							"});\r",
+							"\r",
+							"const jsonBody = pm.response.json();\r",
+							"pm.test(\"responseBodyTypes\", () => {\r",
+							"    pm.expect(jsonBody).to.be.an(\"object\");\r",
+							"    pm.expect(jsonBody.status).to.be.a(\"boolean\");\r",
+							"    pm.expect(jsonBody.data.id).to.be.a(\"number\");\r",
+							"    pm.expect(jsonBody.data.first_name).to.be.a(\"string\");\r",
+							"})\r",
+							"\r",
+							"\r",
+							"var resSchema = {\r",
+							"    \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"status\": {\r",
+							"            \"type\": \"string\"\r",
+							"        },\r",
+							"        \"data\":{\r",
+							"            \"type\": \"object\",\r",
+							"            \"properties\": {\r",
+							"                \"id\":{\r",
+							"                    \"type\": \"number\"\r",
+							"                },\r",
+							"                \"first_name\":{\r",
+							"                    \"type\": \"string\"\r",
+							"                },\r",
+							"                \"middle_name\":{\r",
+							"                    \"type\": \"string\"\r",
+							"                },\r",
+							"                \"last_name\":{\r",
+							"                    \"type\": \"string\"\r",
+							"                },\r",
+							"                \"date_of_birth\":{\r",
+							"                    \"type\": \"string\"\r",
+							"                }\r",
+							"            }\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"pm.test(\"schemaValidation\", () => {\r",
+							"    pm.expect(tv4.validate(jsonBody, resSchema)).to.be.true;\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://thetestingworldapi.com/api/studentsDetails/9373725",
+					"protocol": "https",
+					"host": [
+						"thetestingworldapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"studentsDetails",
+						"9373725"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Student By ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 9373729,\r\n    \"first_name\": \"TochuNew\",\r\n    \"middle_name\": \"KaNew\",\r\n    \"last_name\": \"SuiNew\",\r\n    \"date_of_birth\": \"01/01/2005\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://thetestingworldapi.com/api/studentsDetails/9373729",
+					"protocol": "https",
+					"host": [
+						"thetestingworldapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"studentsDetails",
+						"9373729"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Student By ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://thetestingworldapi.com/api/studentsDetails/9373720",
+					"protocol": "https",
+					"host": [
+						"thetestingworldapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"studentsDetails",
+						"9373720"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
