@@ -3,6 +3,7 @@ import { IoMdMenu } from "react-icons/io";
 // import { IoLogOutOutline } from "react-icons/io5";
 import { FaRegSquareCaretDown } from "react-icons/fa6";
 
+
 const NavBar = () => {
     const[openMenu, setopenMenu] = useState(false);
     const handleMenu = () =>{
